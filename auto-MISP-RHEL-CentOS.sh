@@ -101,8 +101,8 @@ source "$execdir"/automisp.conf
 ########################################
 
 print_status "OS Version Check.."
-release=`cat /etc/redhat-release | cut -d" " -f4`
-if [[ $release == "7."* ]]; then
+release=`cat /etc/redhat-release | egrep -o [[:digit:]] | head -1`
+if [[ $release == "7"* ]]; then
 	print_good "OS is RHEL/CentOS 7. Good to go."
 else
     print_notification "This is not RHEL/CentOS 7, this script has NOT been tested on other platforms."
