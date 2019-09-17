@@ -745,7 +745,7 @@ systemctl enable --now misp-workers.service &>> $logfile
 error_check 'misp-workers startup'
 
 #########################################
-#Adding in misp-modules, and creating persistence for the misp-modules service
+#Adding in misp-modules, creating persistence for the misp-modules service
 
 print_status "Installing and configuring MISP modules.."
 

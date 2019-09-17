@@ -21,7 +21,7 @@ A lot. 99% of it comes directly from the RHEL7/CentOS 7 Installation guide itsel
 	- Generating a `dhparam.pem` file as a part of good SSL housekeeping. This took my VM around 20 minutes or so to do, even with haveged running to help with entropy/RNG. 
 	 	- Yes, the script installs and configures a self-signed SSL cert. 
 	 	- Yes, I realize this is a contradiction. 
-	 	- At some point, I might consider supporting getting an SSL cert via letsencrypt and `acme.sh`
+	 	- At some point, I'm considering supporting getting an SSL cert via letsencrypt and `acme.sh`
 4. If you would like to see the output from various commands while the script is running them, you can open a second terminal window and run the command `tail -f /var/log/misp_install.log`
 	- Note that if you run into problems with the automisp script, that this log file will help you immensely with figuring out which command(s) failed and why.
 5. Upon completion, you should have a (mostly) working MISP installation. Point your favorite web browser to https://[your ip adress here] and you should be greeted with the MISP login prompt. Default credentials for MISP are username: `admin@admin.test` password: `admin` upon first login, you will immediately be prompted to change this password.
