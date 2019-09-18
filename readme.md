@@ -47,3 +47,8 @@ RHEL8 Users, this script is NOT yet supported for use on Redhat 8. The MISP inst
 - the MISP Project team for being extremely responsive, and providing most of the code and documentation required to actually write this script. For the most part, all I had to do was copy/paste, fix a couple of issues here and there, and build in some error-checking/catching here and there. Many thanks!
 
 - Munin for pointing me to a stackexchange thread on ways to trick systemd into accepting arguments in systemd service files (https://superuser.com/questions/728951/systemd-giving-my-service-multiple-arguments). This helped to resolve an issue with the misp-modules.service systemd service file in the installation documentation : for some reason it wasn't recognizing command line arguments to misp-modules, so we passed those arguments as a variable, and it worked. neat.
+  
+## Patch Notes:
+### 2019-09-18
+- Got a copy of RHEL7 and a developer license to test out whether this script actually works on RHEL7, Things seem to work perfectly fine . I had to make a slight change to how the script handles installing the EPEL repo RPM. If its already installed (e.g. a user already installed it, or the script failed to run, but managed to install it before crashing) , then using `yum install` will  fail because its already there. So if we see yum install fail to install the EPEL repo, the script will attempt to run `yum reinstall [epel repo]` and if that fails, we'll considering an error to stop script execution on.
+- Also updated the documentation to tell RHEL7 users that you need a subscription with access to the EPEL repos and that the redhat developer portal is a thing.

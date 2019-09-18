@@ -169,6 +169,14 @@ if [[ $is_redhat == "1" ]]; then
 	subscription-manager repos --enable rhel-server-rhscl-7-rpms &>> $logfile
 	error_check 'SCL repo configuration'
 	yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm &>> $logfile
+	if [ $? -eq 0 ]; then
+		print_good "EPEL repo installation successfully completed."
+	else
+		print_notification "EPEL repo installation failed. running yum with reinstall argument to see if its already been installed.."
+		yum -y reinstall https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm &>> $logfile
+		error_check 'EPEL repo reinstall'
+	fi
+fi
 	error_check 'RHEL EPEL repo installation'
 else
 	print_status "Installing epel-release and centos-release-scl via yum.."
