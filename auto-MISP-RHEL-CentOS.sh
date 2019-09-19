@@ -176,8 +176,6 @@ if [[ $is_redhat == "1" ]]; then
 		yum -y reinstall https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm &>> $logfile
 		error_check 'EPEL repo reinstall'
 	fi
-fi
-	error_check 'RHEL EPEL repo installation'
 else
 	print_status "Installing epel-release and centos-release-scl via yum.."
 	declare -a packages=( epel-release centos-release-scl );
@@ -189,9 +187,9 @@ fi
 # the misp script has us install expect, but we don't actually need it. You can run all of the mysql_secure_install statements with no user input.
 # Also the installer docs need the mysql client, but the rh-mariadb package doesn't actually include the mysql client, so... thats borken, and I fixed it.
 
-print_status "Installing packages: deltarpm  mysql ntpdate neovim gcc git zip rh-git218 httpd24 mod_ssl rh-redis32 rh-mariadb102 libxslt-devel zlib-devel ssdeep-devel rh-php72 rh-php72-php-fpm rh-php72-php-devel rh-php72-php-mysqlnd rh-php72-php-mbstring rh-php72-php-xml rh-php72-php-bcmath rh-php72-php-opcache rh-php72-php-gd rh-python36 haveged devtoolset-7 cmake3 cppcheck gpgme-devel openjpeg-devel gcc-c++ poppler-cpp-devel pkgconfig python-devel redhat-rpm-config rh-ruby22 rubygem-rouge rubygem-asciidoctor zbar-devel opencv-devel.."
-print_notification "This is a large number of packages. About 800MB in total. This could take some time depending on your internet connectivity."
 declare -a packages=( deltarpm mysql ntpdate neovim gcc git zip rh-git218 httpd24 mod_ssl rh-redis32 rh-mariadb102 libxslt-devel zlib-devel ssdeep-devel rh-php72 rh-php72-php-fpm rh-php72-php-devel rh-php72-php-mysqlnd rh-php72-php-mbstring rh-php72-php-xml rh-php72-php-bcmath rh-php72-php-opcache rh-php72-php-gd rh-python36 haveged devtoolset-7 cmake3 cppcheck gpgme-devel openjpeg-devel gcc-c++ poppler-cpp-devel pkgconfig python-devel redhat-rpm-config rh-ruby22 rubygem-rouge rubygem-asciidoctor zbar-devel opencv-devel );
+print_status "Installing packages: `echo ${packages[*]}`.."
+print_notification "This is a large number of packages. About 800MB in total. This could take some time depending on your internet connectivity."
 install_packages ${packages[@]}
 
 ########################################
